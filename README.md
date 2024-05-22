@@ -3,12 +3,13 @@
 
 
 60ghz.io is a gigabit wireless technology designed to meet the growing demand
-for reliable high-speed internet access. It is built on the open source Terragraph stack.
+for reliable high-speed internet access. It is built on the open source Terragraph stack
+from Meta.
 
 This repository contains a software framework to build a complete Linux image
 for the radio nodes.
 
-T60ghz.io uses the [Yocto Project] as the underlying build framework.
+60ghz.io uses the [Yocto Project] as the underlying build framework.
 
 ## File Structure
 The Yocto naming pattern is used in this repository. A "`meta-layer`" is used to
