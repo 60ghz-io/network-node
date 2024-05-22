@@ -1,17 +1,14 @@
-# Terragraph
+# 60ghz.io
 
-<p align="center">
-  <img src="./docs/media/logo/terragraph-logo-full-RGB.svg" width="320" />
-</p>
 
-Terragraph is a gigabit wireless technology designed to meet the growing demand
-for reliable high-speed internet access. Documentation for the project can be
-found at [terragraph.com](https://terragraph.com).
+
+60ghz.io is a gigabit wireless technology designed to meet the growing demand
+for reliable high-speed internet access. It is built on the open source Terragraph stack.
 
 This repository contains a software framework to build a complete Linux image
 for the radio nodes.
 
-Terragraph uses the [Yocto Project] as the underlying build framework.
+T60ghz.io uses the [Yocto Project] as the underlying build framework.
 
 ## File Structure
 The Yocto naming pattern is used in this repository. A "`meta-layer`" is used to
@@ -24,22 +21,22 @@ reference distribution of the Yocto Project.
 * **recipes-connectivity** - Extensions to various Poky networking recipes.
 * **recipes-core** - Extensions to various core recipes.
 * **recipes-extended** - Various tweaks to standard Poky recipes.
-* **recipes-facebook** - Meta's recipes for end-to-end networking setup and monitoring.
+* **recipes-facebook** - 60ghz.io's recipes for end-to-end networking setup and monitoring.
 * **recipes-kernel** - Build a Linux kernel.
 * **recipes-radio** - 60GHz radio drivers and firmware.
 * **recipes-support** - Various third-party helper libraries and utilities.
 * **recipes-utils** - Various helper scripts.
-* **recipes-wifi** - Recipes specific to Puma's ESP32 wifi module.
+* **recipes-wifi** - Recipes specific to Lynx's ESP32 wifi module.
 
-* **meta-x86** - Terragraph layer for building specific to x86 processors and emulation.
-* **meta-qoriq** - Terragraph layer for building specific to NXP QorIQ processors.
-* **meta-qca** - Terragraph layer for building specific to QTI-based radios on top of meta-qoriq.
+* **60ghz-x86** - 60ghz.io layer for building specific to x86 processors and emulation.
+* **60ghz-qoriq** - 60ghz.io layer for building specific to NXP QorIQ processors.
+* **60ghz-qca** - 60ghz.io layer for building specific to QTI-based radios on top of meta-qoriq.
 
 * **conf** - Various bitbake configuration files.
-* **docs** - Terragraph documentation.
+* **docs** - 60ghz.io documentation.
 * **docusaurus** - Terragraph static website.
 * **licenses** - Additional open source licenses for code used in the project.
-* **src** - Sources for various Meta components.
+* **src** - Sources for various 60ghz.io components.
 * **utils** - Miscellaneous utility scripts.
 
 ## Building
@@ -54,11 +51,11 @@ during builds, add `INHERIT += "rm_work"` to `conf/local.conf` in the build
 directory.
 
 The Yocto Project's [Quick Start Guide] covers how to set up a machine for
-various platforms. Several Meta components require C++17 support and require a
+various platforms. Several components require C++17 support and require a
 modern GCC to compile. There are also a couple of different embedded firmwares
 that can require additonal toolchains installed in `/opt`. The
 `utils/docker/Dockerfile` script contains an example for setting up an Ubuntu
-container to do meta-qca Puma-based builds. For other builds, the setup is
+container to do 60ghz-qca Lynx-based builds. For other builds, the setup is
 similar except that the ESP32 toolchain is not required.
 
 By default, the builds are set to run with number of CPUs as both the number of
@@ -70,15 +67,15 @@ command to retry the failed compilations.
 ### Building the E2E Image
 The e2e-image target builds a tarball for an x86 chroot environment that can be
 used as the Terragraph E2E controller. This build target is available for all
-hardware platforms and is a good introduction to the Terragraph E2E stack and
+hardware platforms and is a good introduction to the 60ghz.io E2E stack and
 userland.
 
 1. Set up the build environment based on the Yocto Project's
    [Quick Start Guide].
 
-2. Clone the Terragraph sources.
+2. Clone the 60ghz sources.
  ```bash
- $ git clone https://github.com/terragraph/meta-terragraph.git
+ $ git clone https://github.com/60ghz-io/network-node.git
  $ cd meta-terragraph
  ```
 
@@ -108,8 +105,8 @@ The final build result is
 `build-x86/tmp/deploy/images/tgx86/e2e-image-tgx86.tar.gz`. This is an x86
 chroot environment suitable for use with the E2E controller.
 
-### Building the Terragraph Puma Radio Image
-Puma is an NXP/QTI-based radio platform and is available to build if there is a
+### Building the 60ghz Lynx Radio Image
+Lynx is an NXP/QTI-based radio platform and is available to build if there is a
 top-level meta-qca directory. It requires radio firmware from QTI to build.
 
 1. Set up the build environment based on the Yocto Project's
@@ -127,9 +124,9 @@ top-level meta-qca directory. It requires radio firmware from QTI to build.
     `IMAGE_INSTALL` variables or pass `-R ../conf/no-esp-fw.conf` to bitbake
     commands in later steps.
 
-3. Clone or untar the Terragraph sources.
+3. Clone or untar the 60ghz sources.
  ```bash
- $ git clone https://github.com/terragraph/meta-terragraph.git
+ $ git clone https://github.com/60ghz-io/network-node.git
  $ cd meta-terragraph
  ```
 
@@ -168,17 +165,9 @@ The final build result is
 self-extracting image for the Puma radios. Run `./tg-update-qoriq.bin -h` for
 usage instructions.
 
-## Community
-Please review our [Code of Conduct](CODE_OF_CONDUCT.md) and
-[Contributing Guidelines](CONTRIBUTING.md).
-
-General discussions are held on our
-[Discord server](https://discord.gg/HQaxCevzus).
-
-![](https://discordapp.com/api/guilds/982440743765409822/widget.png?style=banner2)
 
 ## License
-Terragraph is made up of different packages. Each package contains recipe files
+Terragraph and 60ghz is made up of different packages. Each package contains recipe files
 that detail where to fetch source code from third party sources or local
 directories. The recipe files themselves are provided under the MIT license in
 `licenses/Meta-MIT`, but your use of the code fetched by each recipe file is
